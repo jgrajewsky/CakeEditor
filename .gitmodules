@@ -1,0 +1,3 @@
+[submodule "Cake"]
+	path = Cake
+	url = https://github.com/jgrajewsky/Cake
