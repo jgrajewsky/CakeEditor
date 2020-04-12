@@ -1,0 +1,16 @@
+-lib electron
+-cp src
+-dce full
+--each
+
+--next
+-js resources/main.js
+-main Main
+
+--next
+-js resources/app.js
+-main App
+
+--next
+-js resources/creator.js
+-main Creator

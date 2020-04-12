@@ -1,0 +1,101 @@
+body {
+    overflow-y: auto;
+}
+
+#top {
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    height: calc(100% - 45px);
+}
+
+.side {
+    margin-right: 5vw;
+    width: 40%;
+    margin-top: 15px;
+}
+
+#settings {
+    margin-right: 0;
+    max-width: 300px;
+}
+
+#bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #303030;
+}
+
+    #bottom > button {
+        margin-right: 15px;
+        width: 90px;
+        height: 30px;
+    }
+
+.collapse {
+    cursor: pointer;
+    margin: 15px 0;
+}
+
+    .collapse > img {
+        margin-bottom: -5px;
+    }
+
+.label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#templates, #examples {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    transition: max-height 0.2s ease-out;
+}
+
+#examples {
+    margin-bottom: 15px;
+}
+
+.template-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 110px;
+    height: 110px;
+    margin: 0 15px 15px 0;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+    .template-button > img {
+        height: 35%;
+    }
+
+.template-selected {
+    background-color: aliceblue;
+}
+
+.input {
+    margin-bottom: 30px;
+}
+
+#location {
+    width: 143px;
+    padding-right: 30px;
+}
+
+#location-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: -3px 6px -7px -30px;
+    cursor: pointer !important;
+    background-image: url(more.svg);
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <div style="display: none;">Icon made by <a href="https://www.flaticon.com/authors/payungkead" title="Payungkead">Payungkead</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+    
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="toolbar.css">
+    <link rel="stylesheet" href="app.css">
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+    <div id="toolbar">
+        <div id="object-tools">
+            <button class="toolbar-button toolbar-selected" id="hand-button" title="Hand Tool"><img src="hand.svg"></button>
+            <button class="toolbar-button" id="move-button" title="Move Tool"><img src="move.svg"></button>
+            <button class="toolbar-button" id="rotate-button" title="Rotate Tool"><img src="rotate.svg"></button>
+            <button class="toolbar-button" id="scale-button" title="Scale Tool"><img src="scale.svg"></button>
+        </div>
+        <div id="play-tools">
+            <button class="toolbar-button" id="play-button" title="Play"><img src="play.svg"></button>
+            <button class="toolbar-button" id="pause-button" title="Pause "><img src="pause.svg"></button>
+            <button class="toolbar-button" id="step-button" title="Step" disabled><img src="step.svg"><img src="step_inactive.svg"></button>
+        </div>
+        <div id="select-tools">
+            <select class="toolbar-button toolbar-select" id="layer-select">
+                <option value="pies">Pies</option>
+                <option value="kupa">Kupa</option>
+                <option value="mops">Mops</option>
+                <option value="koc">Koc</option>
+            </select>
+            <select class="toolbar-button toolbar-select" id="layout-select">
+                <option value="pies">Pies</option>
+                <option value="kupa">Kupa</option>
+                <option value="mops">Mops</option>
+                <option value="koc">Koc</option>
+            </select>
+        </div>
+    </div>
+    <div id="border"></div>
+    <div class="container container-vertical" id="main-container"></div>
+    <div id="cursor"></div>
+</body>
+
+</html>

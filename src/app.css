@@ -1,0 +1,135 @@
+#border {
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    border-top: 1px #191919 solid;
+}
+
+#cursor {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+#main-container {
+    height: calc(100% - 30px);
+}
+
+.container {
+    display: flex;
+}
+
+.container-horizontal {
+    height: 100%;
+    flex-direction: row;
+}
+
+.container-vertical {
+    width: 100%;
+    flex-direction: column;
+}
+
+.view {
+    width: 100%;
+    height: 100%;
+    background-color: #383838;
+}
+
+.tabs {
+    position: relative;
+    top: 1px;
+    height: 18px;
+    background-color: #282828;
+    overflow: scroll hidden;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+.tab {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    width: 70px;
+    height: 100%;
+    pointer-events: all;
+}
+
+    .tab > img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .tab > * {
+        margin: 1px 0 0 5px;
+    }
+    
+    .tab-active {
+        background-color: #383838;
+    }
+
+    .tab-focus::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #3a79bb;
+    }
+
+.tab-drag-drop {
+    position: absolute;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    margin: 1px 0 0 1px;
+}
+
+.tab-label {
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: #cccccc;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.divider {
+    position: absolute;
+}
+
+    .divider > div {
+        position: relative;
+        z-index: 1;
+        background-color: #191919;
+    }
+
+.divider-horizontal {
+    cursor: s-resize;
+    padding: 5px 0;
+}
+
+    .divider-horizontal > div {
+        width: 100%;
+        height: 2px;
+    }
+
+.divider-vertical {
+    cursor: w-resize;
+    padding: 0 5px;
+}
+
+    .divider-vertical > div {
+        width: 2px;
+        height: 100%;
+    }
