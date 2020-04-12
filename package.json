@@ -2,9 +2,9 @@
   "name": "Cake",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/main.js",
+  "main": "./resources/main.js",
   "scripts": {
-    "start": "electron ./build",
+    "start": "electron ./resources",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
