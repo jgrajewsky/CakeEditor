@@ -14,3 +14,7 @@
 --next
 -js resources/creator.js
 -main Creator
+
+--next
+-js resources/explorer.js
+-main Explorer

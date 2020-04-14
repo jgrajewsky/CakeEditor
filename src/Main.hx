@@ -115,7 +115,7 @@ class Main {
 
 	private static function newProject():Void {
 		if (explorer != null) {
-			creator.close();
+			explorer.close();
 		}
 		if (creator == null) {
 			creator = new BrowserWindow({
@@ -171,7 +171,7 @@ class Main {
 			});
 			explorer.loadFile("explorer.html");
 			explorer.setMenu(null);
-			// explorer.webContents.openDevTools();
+			explorer.webContents.openDevTools();
 
 			explorer.on(ready_to_show, function() {
 				explorer.webContents.zoomFactor = app.webContents.zoomFactor;

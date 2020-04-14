@@ -22,8 +22,10 @@
     width: 28px;
     height: 20px;
     margin: 0 1px;
-    text-align: center;
     background-color: #383838;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
     border: none !important;
     border-radius: 0;
 }
@@ -41,21 +43,6 @@
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
     }
-    
-    .toolbar-button > img {
-        height: 18px;
-        margin-left: -1px;
-    }
-    
-    #hand-button > img {
-        height: 14px;
-        margin-top: 2px;
-    }
-
-    #move-button > img {
-        height: 16px;
-        margin-top: 1px;
-    }
 
     .toolbar-button[disabled] {
         background-color: #292929 !important;
@@ -69,7 +56,38 @@
         display: none;
     }
     
+#hand-tool {
+    background-image: url("hand.svg");
+    background-size: 14px;
+}
+
+#move-tool {
+    background-image: url("move.svg");
+}
+
+#rotate-tool {
+    background-image: url("rotate.svg");
+}
+
+#scale-tool {
+    background-image: url("scale.svg");
+}
+
+#play-button {
+    background-image: url("play.svg");
+}
+
+#pause-button {
+    background-image: url("pause.svg");
+}
+
+#step-button {
+    background-image: url("step.svg");
+    background-size: 18px;
+}
+    
 .toolbar-select {
+    background-color: #383838;
     width: 100px;
     height: 20px;
     border: none;

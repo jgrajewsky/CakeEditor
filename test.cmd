@@ -1,4 +1,3 @@
-git submodule update --init --recursive
 robocopy src resources /s>nul
 del resources\*.hx /q
 robocopy assets resources /s>nul

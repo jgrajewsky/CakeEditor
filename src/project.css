@@ -1,0 +1,34 @@
+body {
+    overflow-y: auto;
+}
+
+#top {
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    height: calc(100% - 45px);
+}
+
+#bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #303030;
+}
+
+    #bottom > button {
+        margin-right: 15px;
+        width: 90px;
+        height: 30px;
+    }
+
+.label {
+    display: block;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+}

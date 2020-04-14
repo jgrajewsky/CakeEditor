@@ -1,0 +1,31 @@
+#projects {
+    margin-top: 15px;
+    width: 85%;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    text-align: initial;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.name {
+    margin-left: 20px;
+    flex: 1;
+}
+
+.version, .pplatform, .date {
+    margin-right: 7%;
+}
+
+.options {
+    margin-right: 15px;
+    width: 25px;
+    height: 25px;
+    background: url("more.svg") no-repeat center;
+    transform: rotate(90deg);
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project.css">
     <link rel="stylesheet" href="creator.css">
     <script defer src="creator.js"></script>
 </head>
@@ -11,21 +12,17 @@
 <body>
     <div id="top">
         <div class="side">
-            <div class="collapse">
-                <img src="arrow_down.svg">
-                <span class="label">Templates</span>
+            <div class="label collapse">
+                <img src="arrow_down.svg">Templates
             </div>
             <div id="templates"></div>
-            <div class="collapse">
-                <img src="arrow_right.svg">
-                <span class="label">Examples</span>
+            <div class="label collapse">
+                <img src="arrow_right.svg">Examples
             </div>
             <div style="max-height: 0px;" id="examples"></div>
         </div>
         <div id="settings" class="side">
-            <div class="collapse">
-                <span class="label">Settings</span>
-            </div>
+            <span class="label">Settings</span>
             <span class="input">Project Name<input id="name" value="New Cake Project"></span>
             <span class="input">Location<div><input id="location"><div id="location-icon"></div></div></span>
         </div>

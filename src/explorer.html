@@ -4,12 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project.css">
     <link rel="stylesheet" href="explorer.css">
     <script defer src="explorer.js"></script>
 </head>
 
 <body>
-
+    <div id="top">
+        <div id="projects">
+            <span class="label">Projects</span>
+            <div class="column-labels">
+                <div class="name-column">Project Name</div>
+                <div class="version-column">Cake Version</div>
+                <div class="platform-column">Target Platform</div>
+                <div class="date-column">Last Modified</div>
+                <div class="option-column"></div>
+            </div>
+            <button class="project">
+                <div class="name"><b>TestFPS</b><br>C:\Projects\TestFPS</div>
+                <div class="version">1.0.0</div>
+                <div class="platform">Windows</div>
+                <div class="date">a few moments ago</div>
+                <div class="options"></div>
+            </button>
+        </div>
+    </div>
+    <div id="bottom">
+        <button id="cancel">Cancel</button>
+        <button id="open">Open</button>
+    </div>
 </body>
 
 </html>
