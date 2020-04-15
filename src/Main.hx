@@ -119,7 +119,7 @@ class Main {
 		}
 		if (creator == null) {
 			creator = new BrowserWindow({
-				title: "Project Creator",
+				title: "New Project",
 				parent: app,
 				width: 750,
 				height: 500,
@@ -133,12 +133,12 @@ class Main {
 				}
 			});
 			creator.loadFile("creator.html");
-			creator.setMenu(null);
-			creator.webContents.openDevTools();
+			creator.removeMenu();
 
 			creator.on(ready_to_show, function() {
 				creator.webContents.zoomFactor = app.webContents.zoomFactor;
 				creator.show();
+				creator.webContents.openDevTools();
 			});
 
 			creator.on(close, function() {
@@ -156,7 +156,7 @@ class Main {
 		}
 		if (explorer == null) {
 			explorer = new BrowserWindow({
-				title: "Project Explorer",
+				title: "Open Project",
 				parent: app,
 				width: 750,
 				height: 500,
@@ -170,12 +170,12 @@ class Main {
 				}
 			});
 			explorer.loadFile("explorer.html");
-			explorer.setMenu(null);
-			explorer.webContents.openDevTools();
+			explorer.removeMenu();
 
 			explorer.on(ready_to_show, function() {
 				explorer.webContents.zoomFactor = app.webContents.zoomFactor;
 				explorer.show();
+				explorer.webContents.openDevTools();
 			});
 
 			explorer.on(close, function() {

@@ -14,8 +14,8 @@ class Creator {
 
 	private static function main() {
 		window.onload = function() {
-			document.onkeyup = function(e) {
-				if (e.key == "Escape") {
+			document.onkeydown = function(e) {
+				if (e.which == 27) {
 					Remote.getCurrentWindow().close();
 				}
 			};
@@ -30,11 +30,23 @@ class Creator {
 				var arrow = container.previousElementSibling.firstElementChild;
 				arrow.setAttribute("src", collapsed ? "arrow_down.svg" : "arrow_right.svg");
 			};
-			templateContainer.previousElementSibling.onclick = function() {
+			var templateCollapse = templateContainer.previousElementSibling;
+			templateCollapse.onclick = function() {
 				toggleCollapse(templateContainer);
 			};
-			exampleContainer.previousElementSibling.onclick = function() {
+			templateCollapse.onkeypress = function(e) {
+				if (e.which == 13) {
+					templateCollapse.click();
+				}
+			};
+			var exampleCollapse = exampleContainer.previousElementSibling;
+			exampleCollapse.onclick = function() {
 				toggleCollapse(exampleContainer);
+			};
+			exampleCollapse.onkeypress = function(e) {
+				if (e.which == 13) {
+					exampleCollapse.click();
+				}
 			};
 			addTemplate(templateContainer, "2d.png", "2D", "Empty 2D Scene");
 			addTemplate(templateContainer, "3d.png", "3D", "Empty 3D Scene");
@@ -63,8 +75,9 @@ class Creator {
 			location.oninput = function(e) {
 				onInput(e.target.value);
 			};
-			document.getElementById("location-icon").onclick = function() {
-				var path = require("electron").remote.dialog.showOpenDialogSync(null, {
+			var locationIcon = document.getElementById("location-icon");
+			locationIcon.onclick = function() {
+				var path = require("electron").remote.dialog.showOpenDialogSync(Remote.getCurrentWindow(), {
 					title: "Choose Project Location",
 					defaultPath: location.getAttribute("value"),
 					properties: ["openDirectory"]
@@ -73,6 +86,11 @@ class Creator {
 					onInput(path);
 				}
 			};
+			locationIcon.onkeypress = function(e) {
+				if (e.which == 13) {
+					locationIcon.click();
+				}
+			}
 			document.getElementById("cancel").onclick = function() {
 				Remote.getCurrentWindow().close();
 			};

@@ -65,6 +65,6 @@
     width: 24px;
     height: 24px;
     margin: -3px 6px -7px -30px;
-    cursor: pointer !important;
-    background-image: url(more.svg);
+    cursor: pointer;
+    background-image: url(more_horiz.svg);
 }
