@@ -3,6 +3,17 @@
     width: 85%;
 }
 
+.label {
+    display: inline-block;
+}
+
+.add {
+    width: 60px;
+    height: 25px;
+    margin-top: 10px;
+    float: right;
+}
+
 .project {
     display: flex;
     align-items: center;

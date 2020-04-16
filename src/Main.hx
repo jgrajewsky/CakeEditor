@@ -1,7 +1,6 @@
 import sys.io.File;
 import electron.main.IpcMain;
 import sys.FileSystem;
-import electron.main.Dialog;
 import electron.main.MenuItem;
 import electron.main.Menu;
 import electron.main.App;
@@ -80,6 +79,20 @@ class Main {
 				makeProjectXml();
 				creator.close();
 			}
+		});
+
+		IpcMain.on("explorerContext", function(e, data) {
+			var template = Menu.buildFromTemplate([
+				new MenuItem({
+					label: "Show in Explorer",
+					click: function() {}
+				}),
+				new MenuItem({
+					label: "Remove from list",
+					click: function() {}
+				})
+			]);
+			template.popup({window: explorer});
 		});
 	}
 
