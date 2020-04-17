@@ -1,3 +1,5 @@
+import js.lib.Object;
+import electron.Shell;
 import sys.io.File;
 import electron.main.IpcMain;
 import sys.FileSystem;
@@ -65,9 +67,9 @@ class Main {
 			});
 		});
 
-		IpcMain.on("create", function(e, data) {
-			projectName = data.name;
-			projectPath = data.path + "\\" + data.name;
+		IpcMain.on("create", function(e, name, path) {
+			projectName = name;
+			projectPath = path + "\\" + name;
 			if (!FileSystem.exists(projectPath)) {
 				FileSystem.createDirectory(projectPath);
 				FileSystem.createDirectory(projectPath + "\\Assets");
@@ -81,18 +83,24 @@ class Main {
 			}
 		});
 
-		IpcMain.on("explorerContext", function(e, data) {
+		IpcMain.on("explorerContext", function(e, path, x, y) {
 			var template = Menu.buildFromTemplate([
 				new MenuItem({
 					label: "Show in Explorer",
-					click: function() {}
+					click: function() {
+						Shell.openItem(path);
+					}
 				}),
 				new MenuItem({
 					label: "Remove from list",
 					click: function() {}
 				})
 			]);
-			template.popup({window: explorer});
+			template.popup({window: explorer, x: x, y: y});
+		});
+
+		IpcMain.on("open", function(e, data) {
+			explorer.close();
 		});
 	}
 
@@ -119,7 +127,7 @@ class Main {
 	}
 
 	private static function setZoom(delta:Float):Void {
-		app.webContents.zoomFactor = Math.min(Math.max(app.webContents.zoomFactor + delta, 0.5), 2.5);
+		app.webContents.zoomFactor = Math.min(Math.max(app.webContents.zoomFactor + delta, 0.5), 1.5);
 	}
 
 	private static function resetZoom():Void {
@@ -127,13 +135,11 @@ class Main {
 	}
 
 	private static function newProject():Void {
-		if (explorer != null) {
-			explorer.close();
-		}
 		if (creator == null) {
 			creator = new BrowserWindow({
 				title: "New Project",
 				parent: app,
+				modal: true,
 				width: 750,
 				height: 500,
 				minWidth: 750,
@@ -164,13 +170,11 @@ class Main {
 	}
 
 	private static function openProject():Void {
-		if (creator != null) {
-			creator.close();
-		}
 		if (explorer == null) {
 			explorer = new BrowserWindow({
 				title: "Open Project",
 				parent: app,
+				modal: true,
 				width: 750,
 				height: 500,
 				minWidth: 750,

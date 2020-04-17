@@ -14,19 +14,31 @@
     float: right;
 }
 
+.name-column {
+    background: url("arrow_down.svg") no-repeat 73px;
+}
+
+.platform-column {
+    background: url("arrow_down.svg") no-repeat 80px;
+}
+
+.date-column {
+    background: url("arrow_down.svg") no-repeat 71px;
+}
+
 .project {
     display: flex;
     align-items: center;
     text-align: left;
     padding: 0;
     width: 100%;
-    height: 60px;
-    margin-bottom: 10px;
+    height: 70px;
 }
 
 .column-labels {
     height: 30px;
     font-size: 12px;
+    margin-bottom: 5px;
 }
 
     .column-labels > div {
@@ -34,21 +46,20 @@
     }
 
 .name {
-    margin-left: 20px;
+    margin: 0 20px;
     flex: 1;
+    line-height: 16px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.version {
-    width: 20%;
-}
+    .name > b {
+        font-size: 16px;
+    }
 
-.platform {
-    width: 20%;
-}
-
-.date {
-    width: 18%;
-    margin-right: 10px;
+.platform, .date {
+    width: 25%;
 }
 
 .options {

@@ -8,8 +8,10 @@ import js.Lib.require;
 class Creator {
 	private static var name:String = "New Cake Project";
 	private static var path:String;
+	private static var template:Int = -1;
 	private static var templateContainer:Element;
 	private static var exampleContainer:Element;
+	private static var createButton:Element;
 	private static var buttons:Array<Element> = new Array<Element>();
 
 	private static function main() {
@@ -21,6 +23,7 @@ class Creator {
 			};
 			document.getElementById("name").oninput = function(e) {
 				name = e.target.value;
+				updateCreate();
 			};
 			templateContainer = document.getElementById("templates");
 			exampleContainer = document.getElementById("examples");
@@ -48,28 +51,24 @@ class Creator {
 					exampleCollapse.click();
 				}
 			};
-			addTemplate(templateContainer, "2d.png", "2D", "Empty 2D Scene");
-			addTemplate(templateContainer, "3d.png", "3D", "Empty 3D Scene");
-			addTemplate(exampleContainer, "2d.png", "Example #0", "Example Project #0");
-			addTemplate(exampleContainer, "3d.png", "Example #1", "Example Project #1");
-			addTemplate(exampleContainer, "3d.png", "Example #2", "Example Project #2");
-			addTemplate(exampleContainer, "2d.png", "Example #3", "Example Project #3");
-			addTemplate(exampleContainer, "3d.png", "Example #4", "Example Project #4");
-			addTemplate(exampleContainer, "3d.png", "Example #5", "Example Project #5");
-			addTemplate(exampleContainer, "2d.png", "Example #6", "Example Project #6");
-			addTemplate(exampleContainer, "3d.png", "Example #7", "Example Project #7");
-			addTemplate(exampleContainer, "3d.png", "Example #8", "Example Project #8");
-			addTemplate(exampleContainer, "2d.png", "Example #9", "Example Project #9");
+			addTemplate(templateContainer, "grid.svg", "2D", "Empty 2D Scene");
+			addTemplate(templateContainer, "landscape.svg", "3D", "Empty 3D Scene");
+			addTemplate(exampleContainer, "category.svg", "Example #0", "Example Project #0");
+			addTemplate(exampleContainer, "category.svg", "Example #1", "Example Project #1");
+			addTemplate(exampleContainer, "category.svg", "Example #2", "Example Project #2");
+			addTemplate(exampleContainer, "category.svg", "Example #3", "Example Project #3");
+			addTemplate(exampleContainer, "category.svg", "Example #4", "Example Project #4");
+			addTemplate(exampleContainer, "category.svg", "Example #5", "Example Project #5");
+			addTemplate(exampleContainer, "category.svg", "Example #6", "Example Project #6");
+			addTemplate(exampleContainer, "category.svg", "Example #7", "Example Project #7");
+			addTemplate(exampleContainer, "category.svg", "Example #8", "Example Project #8");
+			addTemplate(exampleContainer, "category.svg", "Example #9", "Example Project #9");
 			var location = document.getElementById("location");
-			var create = document.getElementById("create");
+			createButton = document.getElementById("create");
 			function onInput(path:String) {
 				Creator.path = path;
 				location.setAttribute("value", path);
-				if (path.length == 0) {
-					create.setAttribute("disabled", "");
-				} else {
-					create.removeAttribute("disabled");
-				}
+				updateCreate();
 			};
 			onInput("C:\\Projects");
 			location.oninput = function(e) {
@@ -94,8 +93,8 @@ class Creator {
 			document.getElementById("cancel").onclick = function() {
 				Remote.getCurrentWindow().close();
 			};
-			create.onclick = function sendCreate() {
-				IpcRenderer.sendSync("create", {name: name, path: path});
+			createButton.onclick = function sendCreate() {
+				IpcRenderer.sendSync("create", name, path);
 			};
 		};
 	}
@@ -104,19 +103,30 @@ class Creator {
 		var button = document.createElement("button");
 		button.classList.add("template-button");
 		button.setAttribute("title", title);
-		if (buttons.push(button) == 1) {
-			button.classList.add("button-active");
-		}
+		button.onmousedown = function(e) {
+			e.preventDefault();
+		};
+		var index = buttons.push(button) - 1;
 		button.onclick = function() {
+			template = index;
 			for (template in buttons) {
 				template.classList.remove("button-active");
 			}
 			button.classList.add("button-active");
+			updateCreate();
 		};
 		container.append(button);
 		var icon = document.createElement("img");
 		icon.setAttribute("src", image);
 		button.appendChild(icon);
 		button.innerHTML += name;
+	}
+
+	private static function updateCreate() {
+		if (template == -1 || name.length == 0 || path.length == 0) {
+			createButton.setAttribute("disabled", "");
+		} else {
+			createButton.removeAttribute("disabled");
+		}
 	}
 }
