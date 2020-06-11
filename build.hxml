@@ -18,3 +18,7 @@
 --next
 -js resources/explorer.js
 -main Explorer
+
+--next
+-js resources/project.js
+-main Project

@@ -2,15 +2,25 @@ import electron.renderer.IpcRenderer;
 import electron.renderer.Remote;
 import js.html.Element;
 import js.Browser.document;
+import js.Browser.window;
 import js.Lib.require;
 
 class Explorer {
 	private static var selectedPath:String;
+	private static var projectPaths:Array<String> = new Array<String>();
 	private static var projectContainer:Element;
 	private static var openButton:Element;
 	private static var buttons:Array<Element> = new Array<Element>();
 
 	private static function main() {
+		projectContainer = document.getElementById("projects");
+		var paths = window.localStorage.getItem("projectPaths");
+		if (paths != null) {
+			projectPaths = paths.split("*");
+			for (path in projectPaths) {
+				addProject(path);
+			}
+		}
 		document.onkeydown = function(e) {
 			if (e.which == 27) {
 				Remote.getCurrentWindow().close();
@@ -21,12 +31,12 @@ class Explorer {
 				title: "Select Project Folder",
 				properties: ["openDirectory"]
 			});
+			if (path != null && projectPaths.indexOf(path[0]) == -1) {
+				addProject(path[0]);
+				projectPaths.push(path[0]);
+				saveProjectPaths();
+			}
 		};
-		projectContainer = document.getElementById("projects");
-		addProject("C:\\Projects\\TestFPS");
-		addProject("C:\\Projects\\GunRun");
-		addProject("C:\\Projects\\aaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbb");
-		addProject("C:\\Projects\\MMORPG");
 		openButton = document.getElementById("open");
 		document.getElementById("cancel").onclick = function() {
 			Remote.getCurrentWindow().close();
@@ -34,6 +44,14 @@ class Explorer {
 		openButton.onclick = function sendCreate() {
 			IpcRenderer.sendSync("open", selectedPath);
 		};
+		IpcRenderer.on("remove", function(e, path) {
+			if (path == selectedPath) {
+				selectedPath = "";
+			}
+			var index = projectPaths.indexOf(path);
+			projectPaths.splice(index, 1);
+			projectContainer.children[index + 3].remove();
+		});
 	}
 
 	private static function addProject(path:String) {
@@ -82,5 +100,9 @@ class Explorer {
 		button.append(date);
 		button.append(options);
 		projectContainer.append(button);
+	}
+
+	private static function saveProjectPaths() {
+		window.localStorage.setItem("projectPaths", projectPaths.join('*'));
 	}
 }

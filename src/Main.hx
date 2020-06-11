@@ -1,4 +1,3 @@
-import js.lib.Object;
 import electron.Shell;
 import sys.io.File;
 import electron.main.IpcMain;
@@ -13,7 +12,6 @@ class Main {
 	private static var creator:BrowserWindow;
 	private static var explorer:BrowserWindow;
 
-	private static var projectName:String;
 	private static var projectPath:String;
 
 	private static function main() {
@@ -67,20 +65,15 @@ class Main {
 			});
 		});
 
-		IpcMain.on("create", function(e, name, path) {
-			projectName = name;
-			projectPath = path + "\\" + name;
-			if (!FileSystem.exists(projectPath)) {
-				FileSystem.createDirectory(projectPath);
-				FileSystem.createDirectory(projectPath + "\\Assets");
-				FileSystem.createDirectory(projectPath + "\\Builds");
-				FileSystem.createDirectory(projectPath + "\\Scripts");
-				var ignore = File.write(projectPath + "\\.gitignore");
-				ignore.writeString("/[Bb]uild/\n/[Bb]uilds/\ndebug.log");
-				ignore.close();
-				makeProjectXml();
-				creator.close();
-			}
+		IpcMain.on("create", function(e, path, name) {
+			projectPath = '${path}\\${name}';
+			FileSystem.createDirectory('${projectPath}\\Assets\\Scenes');
+			FileSystem.createDirectory('${projectPath}\\Assets\\Scripts');
+			FileSystem.createDirectory('${projectPath}\\Builds');
+			var ignore = File.write('${projectPath}\\.gitignore');
+			ignore.writeString("#Cake internal folder\n/Library/\n\n#Possible build folders\n/[Bb]uild/\n/[Bb]uilds/");
+			ignore.close();
+			creator.close();
 		});
 
 		IpcMain.on("explorerContext", function(e, path, x, y) {
@@ -93,29 +86,18 @@ class Main {
 				}),
 				new MenuItem({
 					label: "Remove from list",
-					click: function() {}
+					click: function() {
+						e.reply("remove", path);
+					}
 				})
 			]);
 			template.popup({window: explorer, x: x, y: y});
 		});
 
-		IpcMain.on("open", function(e, data) {
+		IpcMain.on("open", function(e, path) {
 			explorer.close();
+			projectPath = path;
 		});
-	}
-
-	private static function makeProjectXml() {
-		var file = File.write(projectPath + "\\project.xml");
-		file.writeString('<?xml version="1.0" encoding="utf-8"?>
-		<project>
-		<meta title="${projectName}" package="com.company.${projectName}" version="1.0.0" company="Company Name" />
-		<app main="Main" path="Builds" file="${projectName}" />
-		<source path="Source" />
-		<haxelib name="cake" />
-		<assets path="Assets" rename="assets" />
-		</project>
-		');
-		file.close();
 	}
 
 	private static function zoomIn():Void {
